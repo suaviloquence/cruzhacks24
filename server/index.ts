@@ -1,8 +1,12 @@
 import express from "express";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants/assistants";
 import { Thread } from "openai/resources/beta/threads/threads";
+import { promisify } from "util";
+
+const sleep = promisify(setTimeout);
 
 
 dotenv.config({
@@ -42,6 +46,9 @@ const openai = new OpenAI({
 	apiKey: OPENAI_KEY,
 });
 
+app.use(express.static("../static"));
+app.use(express.json());
+
 app.get("/", (req, res) => {
 	res.send("heyyyyy :3")
 });
@@ -58,10 +65,49 @@ app.post("/api/conversations", async (req, res) => {
 	res.json({ id });
 });
 
-app.put("/api/conversations", async (req, res) => {
-	const data = JSON.parse(req.body);
+app.put("/api/conversations/:id", async (req, res) => {
+	console.dir(req.body)
+	const { msg, bot } = req.body;
+	const convo = convos.get(Number.parseInt(req.params.id));
+	if (!convo) return res.sendStatus(404);
+	if (!msg) return res.sendStatus(400);
 
+	let instructions = undefined;
+	// TODO
+	if (bot) {
+	}
+
+	const message = await openai.beta.threads.messages.create(convo.handle.id, {
+		role: "user",
+		content: msg,
+	});
+	console.dir(message);
+
+	let run = await openai.beta.threads.runs.create(convo.handle.id, {
+		assistant_id: assistant.id,
+		instructions,
+	});
+
+	while (run.status !== "completed") {
+		run = await openai.beta.threads.runs.retrieve(convo.handle.id, run.id);
+		// TODO
+		await sleep(200);
+	}
+
+	const messages = await openai.beta.threads.messages.list(convo.handle.id);
+	console.dir(messages);
+	res.json(messages);
 });
+
+app.get("/api/conversations/:id", async (req, res) => {
+	const convo = convos.get(Number.parseInt(req.params.id));
+	if (!convo) return res.sendStatus(404);
+
+	const messages = await openai.beta.threads.messages.list(convo.handle.id);
+	console.dir(messages);
+	res.json(messages);
+})
+
 
 
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Chatter</title>
+	<script>
+		let id;
+		async function cre8() {
+			const sj = await (await fetch("/api/conversations", {
+				method: "POST"
+			})).json();
+			console.dir(sj);
+			id = sj.id;
+		}
+
+		async function send() {
+			msg = document.getElementById("txt").value;
+			console.dir(msg);
+			const res = await fetch(`/api/conversations/${id}`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ msg })
+			})
+
+			const json = await res.json();
+			console.dir(json);
+			return false;
+		}
+	</script>
+</head>
+
+<body>
+	<button onclick="cre8()">Start Convo</button>
+	<form onsubmit="send()" action="#">
+		<input id="txt" type="text" required />
+		<button type="submit">Send</button>
+	</form>
+</body>
+
+</html>
