@@ -22,6 +22,49 @@ interface Bot {
 	context: string
 }
 
+//bot constants --> add the specifics later COME BACK TO ME
+
+const nameOfBot1 = {
+	id: 0o1,
+	name: "Title IX Racoon",
+	url: "https://bbla bla bla",
+	picture:"yuhhhh",
+	context: "this pookie deals with any violations with title ix bla bla bla"
+
+}
+const nameOfBot2 = {
+	id: 0o2,
+	name: "Title IX Racoon",
+	url: "https://bbla bla bla",
+	picture:"yuhhhh",
+	context: "this pookie deals with any violations with title ix bla bla bla"
+
+}
+const nameOfBot3 = {
+	id: 0o3,
+	name: "Title IX Racoon",
+	url: "https://bbla bla bla",
+	picture:"yuhhhh",
+	context: "this pookie deals with any violations with title ix bla bla bla"
+
+}
+const nameOfBot4 = {
+	id: 0o4,
+	name: "Title IX Racoon",
+	url: "https://bbla bla bla",
+	picture:"yuhhhh",
+	context: "this pookie deals with any violations with title ix bla bla bla"
+
+}
+const nameOfBot5 = {
+	id: 0o5,
+	name: "Title IX Racoon",
+	url: "https://bbla bla bla",
+	picture:"yuhhhh",
+	context: "this pookie deals with any violations with title ix bla bla bla"
+
+}
+
 interface Conversation {
 	id: number,
 	handle: Thread,
