@@ -4,6 +4,7 @@ import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants/assistants";
 import { Thread } from "openai/resources/beta/threads/threads";
 import { promisify } from "util";
+import { BOTS, type Bot } from "./bots";
 
 const sleep = promisify(setTimeout);
 
@@ -13,62 +14,18 @@ dotenv.config({
 });
 const app = express();
 
-interface Bot {
-	id: number,
-	name: string,
-	// URL
-	picture: string,
-	context: string
-}
-
-//bot constants --> add the specifics later COME BACK TO ME
-
-const nameOfBot1 = {
-	id: 0o1,
-	name: "Title IX Racoon",
-	url: "https://bbla bla bla",
-	picture: "yuhhhh",
-	context: "this pookie deals with any violations with title ix bla bla bla"
-
-}
-const nameOfBot2 = {
-	id: 0o2,
-	name: "Title IX Racoon",
-	url: "https://bbla bla bla",
-	picture: "yuhhhh",
-	context: "this pookie deals with any violations with title ix bla bla bla"
-
-}
-const nameOfBot3 = {
-	id: 0o3,
-	name: "Title IX Racoon",
-	url: "https://bbla bla bla",
-	picture: "yuhhhh",
-	context: "this pookie deals with any violations with title ix bla bla bla"
-
-}
-const nameOfBot4 = {
-	id: 0o4,
-	name: "Title IX Racoon",
-	url: "https://bbla bla bla",
-	picture: "yuhhhh",
-	context: "this pookie deals with any violations with title ix bla bla bla"
-
-}
-const nameOfBot5 = {
-	id: 0o5,
-	name: "Title IX Racoon",
-	url: "https://bbla bla bla",
-	picture: "yuhhhh",
-	context: "this pookie deals with any violations with title ix bla bla bla"
-
+interface Message {
+	sender: string,
+	bot_info?: Bot,
+	text: string,
 }
 
 interface Conversation {
 	id: number,
 	handle: Thread,
 	// TODO: user data
-	mostRecentBot: number,
+	mostRecentBot: string,
+	messages: Message[],
 }
 
 // TODO: improvement area: use redis or some other more concurrent-safe store
@@ -101,7 +58,8 @@ app.post("/api/conversations", async (req, res) => {
 	const convo: Conversation = {
 		id: id,
 		handle: thread,
-		mostRecentBot: 0,
+		mostRecentBot: "sammy",
+		messages: [],
 	}
 	convos.set(id, convo);
 	res.json({ id });
@@ -112,20 +70,24 @@ app.post("/api/conversations", async (req, res) => {
 app.put("/api/conversation/:id", async (req, res) => {
 	console.dir(req.body)
 	const { msg, bot } = req.body;
+	console.dir(bot);
 	const convo = convos.get(Number.parseInt(req.params.id));
 	if (!convo) return res.sendStatus(404);
 	if (!msg) return res.sendStatus(400);
 
-	let instructions = undefined;
 	// TODO
 	if (bot) {
+		if (!(bot in BOTS)) return res.sendStatus(404);
+		convo.mostRecentBot = bot;
 	}
+
+	let instructions = BOTS[convo.mostRecentBot].instructions;
 
 	const message = await openai.beta.threads.messages.create(convo.handle.id, {
 		role: "user",
 		content: msg,
 	});
-	console.dir(message);
+	convo.messages = [{ sender: "user", text: msg }, ...convo.messages];
 
 	let run = await openai.beta.threads.runs.create(convo.handle.id, {
 		assistant_id: assistant.id,
@@ -139,28 +101,54 @@ app.put("/api/conversation/:id", async (req, res) => {
 	}
 
 	const messages = await openai.beta.threads.messages.list(convo.handle.id);
-	res.json(messages.data.map((x) => ({ msg: x.content, from: x.role, ts: x.created_at })));
+	let actions = new Set();
+	for (const msg of messages.data) {
+		if (msg.role === "user") break;
+		for (const ct of msg.content) {
+			if (ct.type !== "text") continue;
+			convo.messages = [{ sender: convo.mostRecentBot, bot_info: BOTS[convo.mostRecentBot], text: ct.text.value }, ...convo.messages];
+			const search_text = ct.text.value.toLowerCase();
+			for (const bot in BOTS) {
+				for (const kwd of BOTS[bot].keywords) {
+					if (search_text.includes(kwd)) {
+						actions.add({
+							text: `Talk with ${BOTS[bot].name}`,
+							change_bot: bot,
+						});
+						break;
+					}
+				}
+			}
+		}
+	}
+	res.json({ messages: convo.messages, bot: BOTS[convo.mostRecentBot], current_bot: convo.mostRecentBot, actions: [...actions] });
 });
 
 app.get("/api/conversations/:id", async (req, res) => {
 	const convo = convos.get(Number.parseInt(req.params.id));
 	if (!convo) return res.sendStatus(404);
 
-	const messages = await openai.beta.threads.messages.list(convo.handle.id);
-	res.json(messages.data.map((x) => ({ msg: x.content, from: x.role, ts: x.created_at })));
+	res.json({ messages: convo.messages, bot: BOTS[convo.mostRecentBot], current_bot: convo.mostRecentBot });
 })
 
-/*
+
 app.get("/api/bot/:id", async (req, res) => {
-	gets one bot
-})
-app.get("/api/bot/bots", async (req, res) => {
-	gets the list of bots, maybe a clickable page with the bots but kinda like a staff page
-})
+	console.dir(req.params.id, req.params.id in BOTS);
+	if (req.params.id in BOTS) {
+		const { avatar, name, color } = BOTS[req.params.id];
+		res.json({ avatar, name, color });
+	} else {
+		return res.sendStatus(404);
+	}
+});
+app.get("/api/bots", async (req, res) => {
+	res.json(BOTS);
+});
+
 app.get("/api/resources/:id", async (req, res) => {
-	static page of the resource, just the information
-})
-*/
+	// TODO
+});
+
 
 
 app.listen(3639, async () => {
@@ -168,7 +156,7 @@ app.listen(3639, async () => {
 	assistant = await openai.beta.assistants.create({
 		name: "Secretary Sammy",
 		model: "gpt-4-1106-preview",
-		instructions: "You are Secretary Sammy, a chatbot that helps direct UCSC students to the right resources on campus.  Please answer with no markdown and as concisely as possible while still being welcoming and friendly.",
+		instructions: BOTS["sammy"].instructions,
 		tools: [{ type: "retrieval" }]
 	});
 });
