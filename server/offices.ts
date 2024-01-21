@@ -80,7 +80,7 @@ export const OFFICES = {
 				name: "Staff and Faculty needing appointments",
 				link: "https://ombuds.ucsc.edu/"
 			},
-			
+
 		],
 		contact: {
 			staffContactEmail: "deacker@ucsc.edu",
@@ -101,7 +101,7 @@ export const OFFICES = {
 				name: "Seeking Reporting Options:",
 				phone: "831-459-2462"
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 502-CARE (2273)",
@@ -122,7 +122,7 @@ export const OFFICES = {
 				name: "SHOP Talk Toolkit:",
 				link: "https://drive.google.com/drive/folders/1WU7_UCOtbWv-vSwV8M7FDo0akKADceev?usp=share_link"
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 459-3772",
@@ -140,12 +140,12 @@ export const OFFICES = {
 				name: "Weekly workshops and, recovery meetings, and drop-in hours for drug/abuse recovery; sober events on/off campus; provide connections to resource for recovery support; hold students accountable for recovery process",
 				link: "https://shop.ucsc.edu/alcohol-other-drugs/aodappointmentform.html",
 			},
-			
-			
+
+
 		],
 		contact: {
 			phone: "(831) 459-1417",
-			
+
 		},
 		description: "The Cove is an all-inclusive community for students recovering from alcohol and/or other drugs, loved ones of those with addictions, allies, and anyone else who supports recovery. We are a diverse group, varying in ages and lengths of sobriety. The Cove is supported by staff and faculty at the university and community members.",
 		services: ["The Cove: Recovery and support circle for those who have had a past with substance/physical abuse, looking for support in harm recovery, and available for people who wish to support others going through those problems. Provides a chance to socalize and network with others facing similar problems, and mentoring spaces for people seeking guidance."
@@ -163,7 +163,7 @@ export const OFFICES = {
 				name: "Condom Co-Op for free safe sex supplies",
 				link: "https://shop.ucsc.edu/sexual-health/condom-co-op.html"
 			},
-			
+
 		],
 		contact: {
 			instagram: "shop@ucsc.edu",
@@ -177,10 +177,10 @@ export const OFFICES = {
 	"Student Organization Advising and Resources (SOAR)": {
 		link: "https://soar.ucsc.edu/",
 		actions: [
-			
+
 		],
 		contact: {
-			
+
 		},
 		description: "",
 		services: [] //COME BACK
@@ -190,11 +190,11 @@ export const OFFICES = {
 	"SOAR Student Media Cultural Arts and Diversity (SOMeCA)": {
 		link: "https://someca.ucsc.edu/who-we-are/index.html",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
-			
+
 		},
 		description: "",
 		services: [] //COME BACK
@@ -236,7 +236,7 @@ export const OFFICES = {
 				name: "The University of California Washington Center (UCDC)",
 				link: "http://politics.ucsc.edu/undergraduate/ucdc/index.html"
 			},
-			
+
 		],
 		//these ar enot finished
 		contact: {
@@ -295,11 +295,11 @@ export const OFFICES = {
 	"American Indian Resource Center (AIRC)": {
 		link: "https://airc.ucsc.edu/",
 		actions: [ //empty
-		
-			
+
+
 		],
 		contact: {
-			
+
 		},
 		description: "The AIRC is dedicated to supporting the needs of American Indian students and increasing Native visibility on campus by hosting student-centered programs, cultural events and providing tools for academic success and personal well-being. The center is a vital link between American Indian students, the University, and tribal communities that fosters growth through mentoring, leadership opportunities, and scholarly development.",
 		services: [] //COME BACK
@@ -309,11 +309,11 @@ export const OFFICES = {
 	"Asian American/Pacific Islander Resource Center (AAPIRC)": {
 		link: "https://aapirc.ucsc.edu/",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
-			
+
 		},
 		description: "AA/PIRC envisions AA/PI/SWANA communities to be affirmed and empowered in their identities. We imagine individual and collective healing, wholeness, and liberation from oppression, both within and expansive of their existences in relation with UC Santa Cruz.",
 		services: [] //COME BACK
@@ -323,11 +323,11 @@ export const OFFICES = {
 	"Chicanx Latinx Resource Center (El Centro)": {
 		link: "https://elcentro.ucsc.edu/",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
-			
+
 		},
 		description: "Through campus and community partnerships the mission of EL CENTRO is to promote a critical understanding of Chicanx and Latinx communities within the United States and internationally. We accomplish this mission by offering workshops as well as an extensive programming calendar. Our efforts promote cultural affirmation, social justice values and community service. Students attending our activities gain insight into cultural dynamics, social and political processes and the historical significance of the contributions that Chicanx and Latinx/e have made to the U.S and to the broader world community.",
 		services: [] //COME BACK
@@ -341,8 +341,8 @@ export const OFFICES = {
 				name: "Newsletter",
 				link: "http://tinyurl.com/QConnectUCSC",
 			},
-			
-			
+
+
 		],
 		contact: {
 			email: "queer@ucsc.edu",
@@ -350,15 +350,15 @@ export const OFFICES = {
 		description: "The Lionel Cantú Queer Resource Center envisions a campus that connects, retains, and sustains queer and trans students, staff, faculty, and alumni. We envision communities where queer and trans people thrive and are fully liberated, valued, and celebrated.",
 		services: ["The Lionel Cantú Queer Resource Center is the nexus of support and advocacy for the LGBTQIA+ community at the University of California, Santa Cruz. We create co-curricular experiences with students, staff, and faculty to challenge cisheteronormative understandings of gender and sexuality. We build a more inclusive campus community with and for all queer and trans people by providing essential resources and education through programming, workshops, and critical dialogues.",
 
-		"The intention of the Clothing Closet is to provide trans, gender non-conforming, and queer students with the freedom to comfortably find clothing that reflects their gender expression without the discomfort of shopping in a traditional clothing store.",
-		
-		"The Cantú Food Pantry was designed for all hungry students on campus, and specifically with queer and trans students in mind. We offer a self-service pantry stocked with food staples as well as snacks, refrigerated and frozen items. We also welcome and appreciate donations of Capri Suns, Small Chip Bags, Granola Bars, and Ramen!",
-		
-		"Some of the free resources provided in the SMHP include condoms, lube, tampons, pads, dental dams, covid antigen tests, toothpaste and brushes, deoderant, sterile gloves, cough drops, and information on healthy hygine and sexual practices.",
-		
-		"Over 300 books are available for loan, ranging from non-fiction, fiction, LGBTQ+ history, biography, mystery, anthology, short story, manga, picture and comic books, AIDS History, religion, Queer media representation, QTBIPOC written works, poetry, 'zines, and more.",
-		
-		"The Lionel Cantú Queer Center's 'Little Library' doubles as UCSC's first 24 hour food pantry and hygine access library. Giving out snacks, along with sexual and menstrual health products, our Little Library hopes to serve any student seeking food or sexual/menstrual hygine access on campus, whenever the need arises."] //COME BACK
+			"The intention of the Clothing Closet is to provide trans, gender non-conforming, and queer students with the freedom to comfortably find clothing that reflects their gender expression without the discomfort of shopping in a traditional clothing store.",
+
+			"The Cantú Food Pantry was designed for all hungry students on campus, and specifically with queer and trans students in mind. We offer a self-service pantry stocked with food staples as well as snacks, refrigerated and frozen items. We also welcome and appreciate donations of Capri Suns, Small Chip Bags, Granola Bars, and Ramen!",
+
+			"Some of the free resources provided in the SMHP include condoms, lube, tampons, pads, dental dams, covid antigen tests, toothpaste and brushes, deoderant, sterile gloves, cough drops, and information on healthy hygine and sexual practices.",
+
+			"Over 300 books are available for loan, ranging from non-fiction, fiction, LGBTQ+ history, biography, mystery, anthology, short story, manga, picture and comic books, AIDS History, religion, Queer media representation, QTBIPOC written works, poetry, 'zines, and more.",
+
+			"The Lionel Cantú Queer Center's 'Little Library' doubles as UCSC's first 24 hour food pantry and hygine access library. Giving out snacks, along with sexual and menstrual health products, our Little Library hopes to serve any student seeking food or sexual/menstrual hygine access on campus, whenever the need arises."] //COME BACK
 	},
 
 	//COME BACK NOT FINISHED
@@ -393,7 +393,7 @@ export const OFFICES = {
 				name: "Womxn's Center Lending Library Log",
 				link: "https://womenscenter.ucsc.edu/resources/wc-lending-library.html"
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 459-2072",
@@ -407,8 +407,8 @@ export const OFFICES = {
 	"Disability Resource Center (DRC)": {
 		link: "https://drc.ucsc.edu/",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
 			phone: "(831) 459-2089",
@@ -430,7 +430,7 @@ export const OFFICES = {
 				name: "Seeking Reporting Options:",
 				phone: "831-459-2462"
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 502-CARE (2273)",
@@ -576,8 +576,8 @@ export const OFFICES = {
 				name: "Veteran Benefit Forms",
 				link: "https://registrar.ucsc.edu/enrollment/veterans/forms.html"
 			},
-			
-			
+
+
 		],
 		contact: {
 			phone: "831-459-4412",
@@ -585,7 +585,7 @@ export const OFFICES = {
 		},
 		description: "The Office of the Registrar maintains an accurate academic record for each student who enrolls at the University of California, Santa Cruz, and provides timely, accurate, and responsive services to students, faculty, staff and the public. We support student retention and graduation by educating and coaching students through the complexities of University policy and procedures. The Office of the Registrar is reponsible for contributions to policy development and implementation, participation with the Committee on Educational Policy (CEP) and Graduate Council in curriculum, course, and program approval, participation with the Committee on Courses of Instruction (CCI), academic advising and degree audit support, functional processing oversight of the Academic Information System (AIS) and other systems including Campus Curriculum and Leave Planning (CCLP), Online Curriculum Approval (OCA), Resource 25 and Schedule 25 for classroom and event scheduling, support for and interaction with campus systems outside the Office of the Registrar, classroom scheduling and advocacy for renovations, enrollment and fee assessment, grading and transcripts, graduation and diplomas, maintenance of student academic record integrity, Publications, General Catalog, Navigator, preservation of permanent student academic records, enrollment reporting and data analysis, protecting the privacy of student academic records, certification of veteran student education benefits, determination of legal residence for fee purposes.",
 		services: ["The Office of the Registrar at UCSC provides a comprehensive array of services to support students in their academic endeavors. From managing student records, including grades and transcripts, to facilitating the course registration process and overseeing important academic dates, the office plays a crucial role in the university's administrative functions. It assists students in tracking their academic progress towards graduation, ensuring compliance with degree requirements, and providing official transcripts as needed. Additionally, the Registrar's Office offers certification of enrollment, helping students obtain proof of their current academic status. Through these services, the office contributes to the efficient functioning of academic processes, policy compliance, and the overall success of students at UCSC.",
-		"Various petitions and forms are available on their website. "] //COME BACK
+			"Various petitions and forms are available on their website. "] //COME BACK
 	},
 
 	//COME BACK NOT FINISHED
@@ -615,7 +615,7 @@ export const OFFICES = {
 		],
 		contact: {
 			phone: "(831) 459-4543",
-			email:"taps@ucsc.edu",
+			email: "taps@ucsc.edu",
 			salesEmail: "tapssales@ucsc.edu",
 		},
 		description: "Transportation and Parking Services (TAPS) supports the University's mission by providing access to UC Santa Cruz, acting as fiscal stewards, and managing the sustainable planning, design, and operation of safe and equitable bicycle/pedestrian programs, transit services, parking, and other transportation-related needs.",
@@ -638,22 +638,22 @@ export const OFFICES = {
 				name: "Apply to be a Tutor",
 				link: "https://lss.ucsc.edu/job-listings/index.html"
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 459-4333",
 			email: "LSS@ucsc.edu",
 		},
 		description: "Learning Support Services is UCSC's undergraduate tutoring center serving over 100 courses per quarter and over 3000 students per year. Our tutoring programs are proven to increase student success. Our students earn higher grades and pass classes at higher rates. We hire and train 150 undergraduate students each year as successfully certified tutors. At Learning Support Services we work to support educational equity efforts on campus by providing culturally responsive education and training to tutors, empowering undergraduate students as leaders, and creating transformative learning experiences for students. This work is only possible through our partnerships with faculty, staff, and students.",
-		services: ["- Large Group Tutoring", "Small Group Tutoring", "Coaching & Workshops", "Study Hall", "Writing and Reading Support", "Accommodations for Tutoring"] 
+		services: ["- Large Group Tutoring", "Small Group Tutoring", "Coaching & Workshops", "Study Hall", "Writing and Reading Support", "Accommodations for Tutoring"]
 	},
 
 	//COME BACK NOT FINISHED
 	"Institutional Research, Assessment, and Policy Studies (IRAPS)": {
 		link: "https://iraps.ucsc.edu/student-statistics/index.html",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
 			phone: "(000) 000-0000",
@@ -716,13 +716,13 @@ export const OFFICES = {
 				phone: "(831) 459-3474",
 				email: "tenadvising@ucsc.edu"
 			},
-			
+
 		],
 		contact: {
-			
+
 		},
 		description: "",
-		services: [] 
+		services: []
 	},
 
 	"Division of Graduate Studies": {
@@ -828,7 +828,7 @@ export const OFFICES = {
 				name: "Academic Misconduct Report Form for Graduate Students (pdf)",
 				link: "https://graddiv.ucsc.edu/current-students/pdfs/AcademicMisconductReport.pdf",
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 459-5079",
@@ -843,21 +843,22 @@ export const OFFICES = {
 	"Division of Undergraduate Education": {
 		link: "https://ue.ucsc.edu/",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
-			
-		description: "Our distinctive Undergraduate Colleges provide communities within a community that including living-and-learning environments, academic advising, themed events, and a multitude of intellectual and social opportunities.",
-		services: [] //COME BACK
+
+			description: "Our distinctive Undergraduate Colleges provide communities within a community that including living-and-learning environments, academic advising, themed events, and a multitude of intellectual and social opportunities.",
+			services: [] //COME BACK
+		},
 	},
 
 	//COME BACK NOT FINISHED
 	"UCSC Campus Mobile Crisis Team": {
 		link: "https://caps.ucsc.edu/mobile-team/index.html",
 		actions: [
-			
-			
+
+
 		],
 		contact: {
 			phone: "(831) 502-9988",
@@ -909,7 +910,7 @@ export const OFFICES = {
 				name: "FASO Slug Series YouTube videos",
 				link: "https://www.youtube.com/channel/UCugZm-yYwvle1JPwrfMO5Hw/featured"
 			},
-			
+
 		],
 		contact: {
 			phone: "(831) 459-2963",
@@ -918,5 +919,4 @@ export const OFFICES = {
 		description: "The UC Santa Cruz Financial Aid and Scholarship Office strives to deliver high quality service to students and their families. We are committed to minimizing financial barriers to support students in achieving their educational goals. In addition, we aim to provide professional expertise with genuine warm regard for individual circumstances. We respect the dignity of individuals and the privacy of confidential information. Our team works to ensure we maintain consistent and fair treatment for all.",
 		services: ["Financial aid helps students and their families pay for college by covering higher education expenses, such as tuition and fees, room and board, books and supplies, and transportation. There are several types of financial aid: grants, scholarships, work-study, and federal or private loans. Students must meet eligibility requirements to apply and receive financial aid. The video below will provide you with information on the costs of attending UCSC, how to apply for financial aid, and the types of aid available to pay for college. Additional financial aid video resources are available to assist with the how-to and next steps of the financial aid process"] //COME BACK
 	}
-
 };
