@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants/assistants";
@@ -28,7 +27,7 @@ const nameOfBot1 = {
 	id: 0o1,
 	name: "Title IX Racoon",
 	url: "https://bbla bla bla",
-	picture:"yuhhhh",
+	picture: "yuhhhh",
 	context: "this pookie deals with any violations with title ix bla bla bla"
 
 }
@@ -36,7 +35,7 @@ const nameOfBot2 = {
 	id: 0o2,
 	name: "Title IX Racoon",
 	url: "https://bbla bla bla",
-	picture:"yuhhhh",
+	picture: "yuhhhh",
 	context: "this pookie deals with any violations with title ix bla bla bla"
 
 }
@@ -44,7 +43,7 @@ const nameOfBot3 = {
 	id: 0o3,
 	name: "Title IX Racoon",
 	url: "https://bbla bla bla",
-	picture:"yuhhhh",
+	picture: "yuhhhh",
 	context: "this pookie deals with any violations with title ix bla bla bla"
 
 }
@@ -52,7 +51,7 @@ const nameOfBot4 = {
 	id: 0o4,
 	name: "Title IX Racoon",
 	url: "https://bbla bla bla",
-	picture:"yuhhhh",
+	picture: "yuhhhh",
 	context: "this pookie deals with any violations with title ix bla bla bla"
 
 }
@@ -60,7 +59,7 @@ const nameOfBot5 = {
 	id: 0o5,
 	name: "Title IX Racoon",
 	url: "https://bbla bla bla",
-	picture:"yuhhhh",
+	picture: "yuhhhh",
 	context: "this pookie deals with any violations with title ix bla bla bla"
 
 }
@@ -89,7 +88,7 @@ const openai = new OpenAI({
 	apiKey: OPENAI_KEY,
 });
 
-app.use(express.static("../static"));
+app.use(express.static("../app/build"));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -108,7 +107,9 @@ app.post("/api/conversations", async (req, res) => {
 	res.json({ id });
 });
 
-app.put("/api/conversations/:id", async (req, res) => {
+
+
+app.put("/api/conversation/:id", async (req, res) => {
 	console.dir(req.body)
 	const { msg, bot } = req.body;
 	const convo = convos.get(Number.parseInt(req.params.id));
@@ -138,8 +139,7 @@ app.put("/api/conversations/:id", async (req, res) => {
 	}
 
 	const messages = await openai.beta.threads.messages.list(convo.handle.id);
-	console.dir(messages);
-	res.json(messages);
+	res.json(messages.data.map((x) => ({ msg: x.content, from: x.role, ts: x.created_at })));
 });
 
 app.get("/api/conversations/:id", async (req, res) => {
@@ -147,8 +147,7 @@ app.get("/api/conversations/:id", async (req, res) => {
 	if (!convo) return res.sendStatus(404);
 
 	const messages = await openai.beta.threads.messages.list(convo.handle.id);
-	console.dir(messages);
-	res.json(messages);
+	res.json(messages.data.map((x) => ({ msg: x.content, from: x.role, ts: x.created_at })));
 })
 
 
@@ -159,6 +158,7 @@ app.listen(3639, async () => {
 	assistant = await openai.beta.assistants.create({
 		name: "Secretary Sammy",
 		model: "gpt-4-1106-preview",
-		instructions: "You are Secretary Sammy, a chatbot that helps direct UCSC students to the right resources on campus.",
+		instructions: "You are Secretary Sammy, a chatbot that helps direct UCSC students to the right resources on campus.  Please answer with no markdown and as concisely as possible while still being welcoming and friendly.",
+		tools: [{ type: "retrieval" }]
 	});
 });
