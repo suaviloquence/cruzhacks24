@@ -129,6 +129,10 @@
 								bot_info = bots[bot];
 							} else if (action.link) {
 								window.open(action.link, "_blank");
+							} else if (action.email) {
+								window.open(`mailto:${action.email}`);
+							} else if (action.phone) {
+								alert(`On your phone, dial ${action.phone}`);
 							} else if (action.send_user_msg) {
 								let tmp = msg;
 								msg = action.send_user_msg;
@@ -156,7 +160,7 @@
 							"#003c6c"}
 					>
 						{#each message.text.split("\n") as txt}
-							<p>{txt}</p>
+							<p>{txt.replaceAll("**", "")}</p>
 						{/each}
 					</div>
 				</div>
