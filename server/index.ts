@@ -1,10 +1,13 @@
 import express from "express";
+import fs from "fs/promises";
+import fs_sync from "fs";
 import dotenv from "dotenv";
 import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants/assistants";
 import { Thread } from "openai/resources/beta/threads/threads";
 import { promisify } from "util";
 import { BOTS, type Bot } from "./bots";
+import { OFFICES } from "./offices";
 
 const sleep = promisify(setTimeout);
 
@@ -20,12 +23,22 @@ interface Message {
 	text: string,
 }
 
+interface Action {
+	text: string,
+	change_bot?: string,
+	link?: string,
+	email?: string,
+	phone?: string,
+	send_user_msg?: string,
+}
+
 interface Conversation {
 	id: number,
 	handle: Thread,
 	// TODO: user data
 	mostRecentBot: string,
 	messages: Message[],
+	actions: Action[],
 }
 
 // TODO: improvement area: use redis or some other more concurrent-safe store
@@ -60,6 +73,10 @@ app.post("/api/conversations", async (req, res) => {
 		handle: thread,
 		mostRecentBot: "sammy",
 		messages: [],
+		actions: [{
+			text: "How can you help me?",
+			send_user_msg: "What is the Crew and how can you help me?",
+		}],
 	}
 	convos.set(id, convo);
 	res.json({ id });
@@ -101,14 +118,19 @@ app.put("/api/conversation/:id", async (req, res) => {
 	}
 
 	const messages = await openai.beta.threads.messages.list(convo.handle.id);
-	let actions = new Set();
+	let actions: Set<Action> = new Set();
 	for (const msg of messages.data) {
 		if (msg.role === "user") break;
 		for (const ct of msg.content) {
-			if (ct.type !== "text") continue;
-			convo.messages = [{ sender: convo.mostRecentBot, bot_info: BOTS[convo.mostRecentBot], text: ct.text.value }, ...convo.messages];
+			if (ct.type !== "text") {
+				console.dir(ct);
+				continue;
+			}
+
+			convo.messages = [{ sender: convo.mostRecentBot, bot_info: BOTS[convo.mostRecentBot], text: ct.text.value.replace(/【\d+†source】/, "") }, ...convo.messages];
 			const search_text = ct.text.value.toLowerCase();
 			for (const bot in BOTS) {
+				if (bot === convo.mostRecentBot) continue;
 				for (const kwd of BOTS[bot].keywords) {
 					if (search_text.includes(kwd)) {
 						actions.add({
@@ -119,8 +141,35 @@ app.put("/api/conversation/:id", async (req, res) => {
 					}
 				}
 			}
+
+			for (const office in OFFICES) {
+				const o = OFFICES[office];
+				// TODO
+				const reduce = () => Math.random() < 0.4;
+				for (const kwd of o.keywords) {
+					if (search_text.includes(kwd)) {
+						console.dir(o.link);
+						if ("link" in o && reduce()) {
+							actions.add({
+								text: `Visit ${office}`,
+								link: o.link
+							});
+						}
+						if ("contact" in o && reduce()) {
+							if ("email" in o.contact) {
+								actions.add({ text: `Email ${office}`, email: o.contact.email });
+							} else if ("phone" in o.contact) {
+								actions.add({ text: `Call ${office}`, phone: o.contact.phone });
+							}
+						}
+
+						break;
+					}
+				}
+			}
 		}
 	}
+	convo.actions = [...actions];
 	res.json({ messages: convo.messages, bot: BOTS[convo.mostRecentBot], current_bot: convo.mostRecentBot, actions: [...actions] });
 });
 
@@ -128,7 +177,7 @@ app.get("/api/conversations/:id", async (req, res) => {
 	const convo = convos.get(Number.parseInt(req.params.id));
 	if (!convo) return res.sendStatus(404);
 
-	res.json({ messages: convo.messages, bot: BOTS[convo.mostRecentBot], current_bot: convo.mostRecentBot });
+	res.json({ messages: convo.messages, bot: BOTS[convo.mostRecentBot], current_bot: convo.mostRecentBot, actions: convo.actions });
 })
 
 
@@ -153,10 +202,40 @@ app.get("/api/resources/:id", async (req, res) => {
 
 app.listen(3639, async () => {
 	console.log("Server running on port 3639");
-	assistant = await openai.beta.assistants.create({
-		name: "Secretary Sammy",
-		model: "gpt-4-1106-preview",
-		instructions: BOTS["sammy"].instructions,
-		tools: [{ type: "retrieval" }]
-	});
+	try {
+		const assistant_id = (await fs.readFile("../assistant.id")).toString();
+		assistant = await openai.beta.assistants.retrieve(assistant_id);
+		console.log("Loaded assistant from id file");
+
+		const ids = await openai.beta.assistants.list();
+		for (const a of ids.data) {
+			console.dir(a);
+			if (a.id !== assistant_id)
+				await openai.beta.assistants.del(a.id);
+		}
+	} catch (e) {
+		console.warn(e);
+		await fs.writeFile("../database.json", JSON.stringify(OFFICES));
+		const db = await openai.files.create({
+			file: fs_sync.createReadStream("../database.json"),
+			purpose: "assistants",
+		});
+		console.log("Uploaded database file")
+
+
+		const context = await openai.files.create({
+			file: fs_sync.createReadStream("../sammy_support_crew.txt"),
+			purpose: "assistants",
+		});
+
+		assistant = await openai.beta.assistants.create({
+			name: "Secretary Sammy",
+			model: "gpt-4-1106-preview",
+			instructions: BOTS["sammy"].instructions,
+			tools: [{ type: "retrieval" }],
+			file_ids: [db.id, context.id],
+		});
+		fs.writeFile("../assistant.id", assistant.id);
+		console.log("Created new assistant");
+	}
 });

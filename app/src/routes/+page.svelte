@@ -28,6 +28,14 @@
 
 	let bot = "sammy";
 	let bot_info: Bot;
+	let actions: {
+		text: string;
+		change_bot?: string;
+		link?: string;
+		email?: string;
+		phone?: string;
+		send_user_msg?: string;
+	}[] = [];
 	fetchBot(bot).catch(console.error);
 
 	async function fetchBot(bot: string) {
@@ -49,6 +57,7 @@
 		console.dir(json);
 		bot_info = json.bot;
 		messages = json.messages;
+		actions = json.actions;
 		bot = json.current_bot;
 	}
 
@@ -75,6 +84,7 @@
 			{ sender: "user", text: msg },
 			...messages,
 		];
+		actions = [];
 		const res = await fetch(`/api/conversation/${convo}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
@@ -84,6 +94,7 @@
 			const json = await res.json();
 			messages = json.messages;
 			bot_info = json.bot;
+			actions = json.actions;
 			// dont erase msg on failure
 			msg = "";
 		} else {
@@ -96,8 +107,38 @@
 </script>
 
 <div id="page">
+	<div id="image">
+		<img class="logo" alt="sammy support crew logo" src="/logo.png" />
+		<img class="sprite" alt={bots[bot]?.name} src={bots[bot]?.avatar} />
+		<p>{bots[bot]?.name}</p>
+	</div>
 	<div id="middle">
 		<div id="chat">
+			<div id="actions">
+				{#if actions.length > 0}
+					<h2>Try:</h2>
+				{/if}
+				{#each actions as action}
+					<button
+						style:background-color={bots[action.change_bot ?? ""]
+							?.color}
+						class:white={bots[action.change_bot ?? ""]?.white}
+						on:click={async () => {
+							if (action.change_bot) {
+								bot = action.change_bot;
+								bot_info = bots[bot];
+							} else if (action.link) {
+								window.open(action.link, "_blank");
+							} else if (action.send_user_msg) {
+								let tmp = msg;
+								msg = action.send_user_msg;
+								await sendMsg();
+								msg = tmp;
+							}
+						}}>{action.text}</button
+					>
+				{/each}
+			</div>
 			{#each messages as message}
 				<div
 					class="msg-container"
@@ -105,8 +146,8 @@
 					class:assistant={message.sender !== "user"}
 				>
 					<img
-						src={message.bot_info?.avatar ?? "/favicon.png"}
-						alt="avatar"
+						src={message.bot_info?.avatar ?? "/user.png"}
+						alt={message.bot_info?.name ?? "user"}
 					/>
 					<div
 						class="message"
@@ -125,8 +166,7 @@
 			<div id="bots">
 				{#each Object.keys(bots) as bot_name}
 					<button
-						style:background-color={bots[bot_name].color}
-						class:white={bots[bot_name].white}
+						style:border-color={bots[bot_name].color}
 						disabled={bot_name === bot}
 						on:click={() => (bot = bot_name)}
 						title={bots[bot_name].name}
@@ -161,15 +201,40 @@
 	#page {
 		display: flex;
 		justify-content: right;
+		gap: min(5vw, 8rem);
+	}
+
+	#image {
+		display: flex;
+		flex-shrink: 1;
+		flex-direction: column;
+		height: 98vh;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#image .logo {
+		align-self: center;
+		max-width: min(25vw, 25rem);
+	}
+
+	#image .sprite {
+		align-self: center;
+		max-height: 90vh;
+		max-width: min(30vw, 30rem);
+	}
+
+	#image p {
+		font: 1.2rem sans-serif;
 	}
 
 	#middle {
 		flex-grow: 0;
-		width: min(100vw, 100rem);
+		width: min(55vw, 100rem);
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		height: 100vh;
+		height: 98vh;
 	}
 	#chat {
 		font-family: sans-serif;
@@ -182,6 +247,21 @@
 
 	.msg-container {
 		display: flex;
+	}
+
+	#actions {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		/* flex-wrap: wrap; */
+	}
+
+	#actions button {
+		cursor: pointer;
+		font-size: 1rem;
+		border-radius: 2rem;
+		padding: 0.5rem 0.5rem;
+		border: none;
 	}
 
 	.msg-container.user {
@@ -223,6 +303,9 @@
 		margin-top: auto;
 		margin-bottom: 2rem;
 		max-height: 20vh;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
 	}
 
 	#send {
@@ -245,6 +328,23 @@
 		display: flex;
 		flex-direction: row-reverse;
 		justify-content: right;
+		gap: 0.5rem;
+	}
+
+	#bots button {
+		font-size: 1.2rem;
+		border-radius: 2rem;
+		padding: 0.5rem;
+		border: 0.4rem solid;
+		background-color: white;
+	}
+
+	#bots img {
+		height: 5rem;
+	}
+
+	#bots button:disabled {
+		border-width: 0.8rem;
 	}
 
 	#send button {

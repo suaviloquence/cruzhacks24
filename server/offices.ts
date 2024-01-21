@@ -1,5 +1,6 @@
-export const OFFICES = {
+export const OFFICES: Record<string, any> = {
 	"Title IX Office": {
+		keywords: ["title ix"],
 		link: "https://titleix.ucsc.edu/index.html",
 		actions: [
 			{
@@ -16,6 +17,7 @@ export const OFFICES = {
 	},
 
 	"Counseling and Psychological Services (CAPS)": {
+		keywords: ["caps"],
 		link: "https://caps.ucsc.edu/",
 		actions: [
 			{
@@ -23,8 +25,8 @@ export const OFFICES = {
 				link: "https://www.google.com/url?q=https%3A%2F%2Fucsc.zoom.us%2Fj%2F7890515689%3Fpwd%3DQitDRG5Ra0pHUEtKZUN5Y0ZDUUhUQT09&sa=D&ust=1706213460000000&usg=AOvVaw1RTvRwvF1dVa2pct_7_2s9",
 			},
 			{
-				name2: "Mental Health Virtual Toolbox",
-				link2: "https://caps.ucsc.edu/groups-and-workshops/virtual-toolbox-anytime.html"
+				name: "Mental Health Virtual Toolbox",
+				link: "https://caps.ucsc.edu/groups-and-workshops/virtual-toolbox-anytime.html"
 			},
 		],
 		contact: {
@@ -35,6 +37,7 @@ export const OFFICES = {
 	},
 
 	"Student Health Center": {
+		keywords: ["health center"],
 		link: "https://healthcenter.ucsc.edu/",
 		actions: [
 			{
@@ -70,6 +73,7 @@ export const OFFICES = {
 	},
 
 	"Office of the Ombuds": {
+		keywords: ["ombuds"],
 		link: "https://ombuds.ucsc.edu/",
 		actions: [
 			{
@@ -91,6 +95,7 @@ export const OFFICES = {
 	},
 
 	"Center for Advocacy, Resources and Empowerment (CARE)": {
+		keywords: ["care"],
 		link: "http://care.ucsc.edu/",
 		actions: [
 			{
@@ -112,6 +117,7 @@ export const OFFICES = {
 	},
 
 	"Student Health Outreach and Promotion (SHOP)": {
+		keywords: ["shop"],
 		link: "https://shop.ucsc.edu/sexual-health/index.html",
 		actions: [
 			{
@@ -134,6 +140,7 @@ export const OFFICES = {
 	},
 
 	"The Cove": {
+		keywords: ["cove"],
 		link: "https://shop.ucsc.edu/students-in-recovery/index.html",
 		actions: [
 			{
@@ -153,6 +160,7 @@ export const OFFICES = {
 	},
 
 	"Slug Love": {
+		keywords: ["slug love"],
 		link: "https://shop.ucsc.edu/sexual-health/index.html",
 		actions: [
 			{
@@ -175,6 +183,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Student Organization Advising and Resources (SOAR)": {
+		keywords: ["soar"],
 		link: "https://soar.ucsc.edu/",
 		actions: [
 
@@ -188,6 +197,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"SOAR Student Media Cultural Arts and Diversity (SOMeCA)": {
+		keywords: ["SOMeCA"],
 		link: "https://someca.ucsc.edu/who-we-are/index.html",
 		actions: [
 
@@ -202,6 +212,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Ethnic Resource Centers (ERC)": {
+		keywords: ["resource centers", "erc"],
 		link: "https://resourcecenters.ucsc.edu/",
 		actions: [
 			{
@@ -252,6 +263,7 @@ export const OFFICES = {
 	},
 
 	"African American Resource and Cultural Center (AARCC)": {
+		keywords: ["aarcc"],
 		link: "https://aarcc.ucsc.edu/",
 		actions: [
 			{
@@ -293,6 +305,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"American Indian Resource Center (AIRC)": {
+		keywords: ["airc"],
 		link: "https://airc.ucsc.edu/",
 		actions: [ //empty
 
@@ -307,6 +320,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Asian American/Pacific Islander Resource Center (AAPIRC)": {
+		keywords: ["aaiprc"],
 		link: "https://aapirc.ucsc.edu/",
 		actions: [
 
@@ -321,6 +335,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Chicanx Latinx Resource Center (El Centro)": {
+		keywords: ["latin", "el centro"],
 		link: "https://elcentro.ucsc.edu/",
 		actions: [
 
@@ -335,6 +350,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED --> fix the actions
 	"Lionel Cantú Queer Center": {
+		keywords: ["cantu", "cantú", "queer", "lgbt"],
 		link: "https://queer.ucsc.edu/",
 		actions: [
 			{
@@ -363,6 +379,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Womxns's Center": {
+		keywords: ["women", "womxn"],
 		link: "https://womenscenter.ucsc.edu/",
 		actions: [
 			{
@@ -405,6 +422,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Disability Resource Center (DRC)": {
+		keywords: ["disabl", "drc"],
 		link: "https://drc.ucsc.edu/",
 		actions: [
 
@@ -420,6 +438,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Services for Transfer and Re-Entry Students (STARS)": {
+		keywords: ["transfer", "stars"],
 		link: "https://stars.ucsc.edu/",
 		actions: [
 			{
@@ -442,6 +461,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Office of the Registrar": {
+		keywords: ["registrar", "enroll", "transcript"],
 		link: "https://registrar.ucsc.edu/about/contact-us.html",
 		actions: [
 			{
@@ -590,6 +610,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Transportation and Parking Services (TAPS)": {
+		keywords: ["taps", "parking", "transportation"],
 		link: "https://taps.ucsc.edu/",
 		actions: [
 			{
@@ -624,6 +645,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Learning Support Services (LSS)": {
+		keywords: ["tutor", "lss"],
 		link: "https://lss.ucsc.edu/",
 		actions: [
 			{
@@ -650,6 +672,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Institutional Research, Assessment, and Policy Studies (IRAPS)": {
+		keywords: ["iraps"],
 		link: "https://iraps.ucsc.edu/student-statistics/index.html",
 		actions: [
 
@@ -664,6 +687,7 @@ export const OFFICES = {
 	},
 
 	"College Directory": {
+		keywords: [],
 		link: "https://ue.ucsc.edu/colleges/index.html",
 		actions: [
 			{
@@ -726,6 +750,7 @@ export const OFFICES = {
 	},
 
 	"Division of Graduate Studies": {
+		keywords: [],
 		link: "https://graddiv.ucsc.edu/",
 		actions: [
 			{
@@ -841,6 +866,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"Division of Undergraduate Education": {
+		keywords: [],
 		link: "https://ue.ucsc.edu/",
 		actions: [
 
@@ -855,6 +881,7 @@ export const OFFICES = {
 
 	//COME BACK NOT FINISHED
 	"UCSC Campus Mobile Crisis Team": {
+		keywords: ["crisis"],
 		link: "https://caps.ucsc.edu/mobile-team/index.html",
 		actions: [
 
@@ -868,6 +895,7 @@ export const OFFICES = {
 	},
 
 	"Finaid Office": {
+		keywords: ["financial", "finaid"],
 		link: "https://financialaid.ucsc.edu/index.html",
 		actions: [
 			{
