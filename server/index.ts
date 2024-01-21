@@ -151,7 +151,17 @@ app.get("/api/conversations/:id", async (req, res) => {
 	res.json(messages);
 })
 
-
+/*
+app.get("/api/bot/:id", async (req, res) => {
+	gets one bot
+})
+app.get("/api/bot/bots", async (req, res) => {
+	gets the list of bots, maybe a clickable page with the bots but kinda like a staff page
+})
+app.get("/api/resources/:id", async (req, res) => {
+	static page of the resource, just the information
+})
+*/
 
 
 app.listen(3639, async () => {
