@@ -1,6 +1,6 @@
 # Sammy Support Crew
 
-[Live demo](https://sammy.b.mcarr.one)
+[Devpost - CruzHacks '24 Best AI](https://devpost.com/software/project-r6g8l5khcx92)
 
 ## About
 
